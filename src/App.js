@@ -1,6 +1,7 @@
-import React from 'react';
-import './App.scss';
+import React from "react";
 
-function App() {
-  return <div className="App" />;
-}
+const App = () => {
+  return <div></div>;
+};
+
+export default App;
