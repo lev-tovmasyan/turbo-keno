@@ -16,4 +16,5 @@ window.getState = isDevelopmentStage() && store.getState;
 export const getStoreState = store.getState;
 export const { dispatch } = store;
 export const getUserId = () => store.getState().userInfo.userId;
+
 export default store;
