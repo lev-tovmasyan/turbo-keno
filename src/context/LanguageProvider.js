@@ -2,13 +2,13 @@ import React,{useState,useEffect, useContext} from 'react';
 import { useSelector } from 'react-redux';
 import getActiveLanguage from "../assets/languages";
 import { GAME_TYPES } from '../constants/names';
+import { getLanguage } from '../helpers/general';
 
 const LanguageContext = React.createContext({});
 
 const LanguageProvider = ({children}) => {
     const [languageData, setLanguageData]=useState(getActiveLanguage());
-    // const gameType = useSelector(state => state.globalInfo.gameType)
-    const gameType = 'keno'
+    const gameType = useSelector(state => state.configs.gameType)
 
     const t = (text) => {
         return languageData[text] || text
@@ -17,7 +17,8 @@ const LanguageProvider = ({children}) => {
     useEffect(() => {
         if(gameType) {
             const isNumbersType = gameType === GAME_TYPES.NUMBERS
-            const [, , language] = window.location.pathname.split('/');
+            const language = getLanguage()
+            console.log('language', language)
             setLanguageData(getActiveLanguage(language, isNumbersType))
         }
     }, [gameType])

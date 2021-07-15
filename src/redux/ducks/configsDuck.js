@@ -1,11 +1,11 @@
 import { createAction, createReducer } from "../../helpers/redux";
 
 // ACTION TYPES
-const SET_GLOBAL_DATA = "SET_GLOBAL_DATA";
+const SET_CONFIGS = "SET_CONFIGS";
 const SET_LANGUAGE = "SET_LANGUAGE";
 
 // ACTIONS
-export const setGlobalData = createAction(SET_GLOBAL_DATA);
+export const setConfigs = createAction(SET_CONFIGS);
 export const setLanguage = createAction(SET_LANGUAGE);
 
 // REDUCER
@@ -15,7 +15,7 @@ const initialState = {
   gameType: null,
 };
 
-export const globalInfo = createReducer(initialState, (state, { value }) => ({
-    [SET_GLOBAL_DATA]: () => ({ ...state, ...value }),
+export const configs = createReducer(initialState, (state, { value }) => ({
+    [SET_CONFIGS]: () => ({ ...state, ...value }),
     [SET_LANGUAGE]: () => ({ ...state, language: value }),
 }));
