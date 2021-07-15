@@ -1,9 +1,9 @@
 import { errorInfo } from "./ducks/errorDuck"
-import { globalInfo } from "./ducks/globalDuck"
+import { configs } from "./ducks/configsDuck"
 
 
 export const reducers = {
   errorInfo,
-  globalInfo,
+  configs,
 }
 
