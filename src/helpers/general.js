@@ -1,3 +1,6 @@
+export const getToken = () => localStorage.getItem('UIToken');
+export const getLanguage = () => localStorage.getItem('UILanguage');
+
 export function isDevelopmentStage() {
   return process.env.NODE_ENV === 'development';
 }

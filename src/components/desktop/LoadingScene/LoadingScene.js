@@ -1,29 +1,20 @@
 import React, {useEffect} from "react";
 import { IMAGES } from '../../../assets/images'
-// import {goToGameScene} from "../../redux/actions/activeSceneActions";
-// import {getGameVersions} from "../../redux/actions/dataActions";
-import {connect, useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { GAME_TYPES } from "../../../constants/names";
-// import { setGameType } from "../../redux/actions/userDataActions";
+import { setConfigs } from "../../../redux/ducks/configsDuck";
+import { getGameVersions } from "../../../redux/thunks";
 
 const { KENO, NUMBERS } = GAME_TYPES
 
-const LoadingScene = ({getGameVersions, gameVersions, goToGameScene}) => {
+const LoadingScene = () => {
 
-  // const gameType = useSelector(state => state.gameType)
-  const gameType = 'keno'
+  const gameType = useSelector(state => state.configs.gameType)
   const dispatch = useDispatch()
 
-  const storeCredentials = () => {
-    const [, , language, token, urlGameType] = window.location.pathname.split('/');
-    localStorage.setItem('UIToken', token);
-    localStorage.setItem('UILanguage', language);
-    // dispatch(setGameType((urlGameType && urlGameType.toLowerCase() === 'numbers') ? NUMBERS : KENO))
-  };
-
   useEffect(() => {
-    // storeCredentials();
-    // getGameVersions();
+    storeCredentials(dispatch);
+    dispatch(getGameVersions())
   }, []);
 
   return (
@@ -43,15 +34,18 @@ const LoadingScene = ({getGameVersions, gameVersions, goToGameScene}) => {
       </div>
     </main>
   );
+
+  function storeCredentials() {
+    const [, , language = 'en', token, urlGameType = KENO] = window.location.pathname.split('/');
+    localStorage.setItem('UIToken', token);
+    localStorage.setItem('UILanguage', language);
+    const gameType = urlGameType.toLowerCase() === NUMBERS ? NUMBERS : KENO
+    const data = {
+      language,
+      gameType
+    }
+    dispatch(setConfigs(data))
+  };
 };
-
-// const mapStateToProps = ({gameVersionsReducer}) => ({
-//   gameVersions: gameVersionsReducer
-// });
-
-// const mapDispatchToProps = {
-//   goToGameScene,
-//   getGameVersions
-// };
 
 export default LoadingScene;
