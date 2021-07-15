@@ -95,3 +95,29 @@ export function getOrdinalPostfix(num) {
       return 'th';
   }
 }
+
+export function addKey(object, key) {
+  object[key] = null;
+  return object;
+}
+
+export function forMap(iterationCount, cb) {
+  forMap.break = '#34#null#break#hdk89';
+
+  const arr = [];
+  if (typeof iterationCount !== 'number' || isNaN(iterationCount)) {
+    throw new TypeError('first arg should be a number');
+  }
+  if (typeof cb !== 'function') {
+    throw new TypeError(cb + ' is not a function');
+  }
+
+  for (let index = 0; index < iterationCount; index++) {
+    const val = cb(index, iterationCount);
+    if (val === forMap.break) {
+      break;
+    }
+    arr.push(val);
+  }
+  return arr;
+}
