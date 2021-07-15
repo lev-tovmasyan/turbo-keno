@@ -1,14 +1,23 @@
 import { AXIOS } from "../../api/axios";
+import dataParser from "../../helpers/dataParser";
 import { getToken } from "../../helpers/general";
 import { setConfigs } from "../ducks/configsDuck";
+import { setErrorMessage } from "../ducks/errorDuck";
 
 export function getGameVersions() {
   return (dispatch) => {
-    AXIOS.get(`/1/get-info/${getToken()}`).then((response) =>
-      console.log(
-        "response",
-        response
-      )
+    AXIOS.get(`/1/get-info/${getToken()}`).then((res) => {
+      const data = res.res.parsedData
+      if(data.error || res.error) {
+        dispatch(setErrorMessage(res.error ? 'Something Went Wrong' : data.message))
+        return console.log('get-info error', data.message)
+      }
+      const { betAmountOption, currency } = dataParser(data)
+      // console.log('parsedData', parsedData)
+      // const { maxWin, maximalBet: maxBet, minimalBet: minBet, currency } = data
+
+      dispatch(setConfigs({ ...betAmountOption, currency }))
+    }
     );
     // .then(data => {
     //       if (data.error) {
