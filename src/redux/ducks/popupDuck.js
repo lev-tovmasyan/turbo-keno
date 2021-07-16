@@ -4,7 +4,6 @@ import { createAction, createReducer } from "../../helpers/redux"
 const SET_ACTIVE_POPUP = "SET_ACTIVE_POPUP";
 const RESET_POPUP = "RESET_POPUP";
 
-
 // ACTIONS
 export const setActivePopup = createAction(SET_ACTIVE_POPUP);
 export const resetPopup = createAction(RESET_POPUP);
