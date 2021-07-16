@@ -6,7 +6,6 @@ import './App.scss';
 import {SCENE_NAMES} from "../../constants/game";
 import LoadingScene from "./LoadingScene/LoadingScene";
 // import {goToGameScene} from "../redux/actions/activeSceneActions";
-// import ErrorsPopup from "./ErrorsPopup/ErrorsPopup";
 
 const {GAME_SCENE, MENU_SCENE, LOADING_SCENE} = SCENE_NAMES;
 
@@ -23,7 +22,6 @@ function Desktop() {
             {activeScene === GAME_SCENE ? <GameScene/> : <MenuScene/>}
           </>
       } */}
-      {/* <ErrorsPopup/> */}
     </div>
   );
 }
